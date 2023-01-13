@@ -430,7 +430,7 @@ abstract class DS {
 		if (DEBUG_ENABLED && (($fargs=func_get_args())||$fargs='NOARGS'))
 			debug_log('Entered (%%)',17,0,__FILE__,__LINE__,__METHOD__,$fargs);
 
-		if (! trim($this->getLogin(null)) && $_SESSION[APPCONFIG]->getValue('appearance','anonymous_bind_implies_read_only'))
+		if (($this->getLogin(null) == "" || !trim($this->getLogin(null))) && $_SESSION[APPCONFIG]->getValue('appearance','anonymous_bind_implies_read_only'))
 			return true;
 		else
 			return $this->getValue('server','read_only');
